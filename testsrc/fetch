@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat urls.txt | xargs --max-lines=1 wget

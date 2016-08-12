@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+ls testsrc/*.elm > /dev/null
+if [ "$?" != "0" ]; then
+    echo "no test files, run 'make fetch'"
+    exit 1
+fi
+
+set -o pipefail
+
+for src in $(ls testsrc/*.elm) ; do
+    cat $src | ./parse
+    if [ "$?" = "0" ]; then
+	echo "$src passed"
+    else
+	echo "$src failed"
+	exit 1
+    fi
+done
